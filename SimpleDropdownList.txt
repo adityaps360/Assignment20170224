@@ -1,0 +1,58 @@
+package startpractising;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class SelectDropdownList {
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+System.setProperty("webdriver.firefox.marionette","E:\\Drivers for Selenium\\geckodriver-v0.14.0-win64\\geckodriver.exe");
+		
+		// SELECT LIST DEMO
+		
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.seleniumeasy.com/test/");
+		driver.findElement(By.id("btn_basic_example")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='basic']/div/a[4]")).click();
+		Select dropdown = new Select(driver.findElement(By.id("select-demo")));
+        dropdown.selectByVisibleText("Sunday");
+        
+        //assertion to compare the day selected
+        
+        WebElement DrpDwn = driver.findElement(By.className("selected-value"));
+		String DrpDwntxt= DrpDwn.getText();
+		Assert.assertTrue(DrpDwntxt.contentEquals("Day selected :- Sunday"));
+        System.out.println(DrpDwntxt);
+       
+        // MULTI SELECT LIST DEMO
+        
+		Select dropdown1 = new Select(driver.findElement(By.id("multi-select")));
+        dropdown1.selectByValue("California");
+        dropdown1.selectByValue("New Jersey");
+        dropdown1.selectByValue("Ohio");
+        dropdown1.selectByValue("Washington");
+        driver.findElement(By.id("printMe")).click();;    
+        
+       //assertion to compare the First value selected
+
+        WebElement DrpDwn1 = driver.findElement(By.className("getall-selected"));
+		String DrpDwntxt1= DrpDwn1.getText();
+		Assert.assertTrue(DrpDwntxt1.contentEquals("First selected option is : Washington"));
+        System.out.println(DrpDwntxt1);
+        
+        
+       driver.findElement(By.id("printAll")).click();
+
+     
+       
+	}
+
+}
