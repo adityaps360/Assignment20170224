@@ -1,0 +1,70 @@
+package startpractising;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class RadioButtonDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+System.setProperty("webdriver.firefox.marionette","E:\\Drivers for Selenium\\geckodriver-v0.14.0-win64\\geckodriver.exe");
+		
+		// RADIO BUTTON DEMO
+		
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.seleniumeasy.com/test/");
+		driver.findElement(By.id("btn_basic_example")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='basic']/div/a[3]")).click();
+		driver.findElement(By.id("buttoncheck")).click(); 
+		
+		//assertion for no radio button checked
+		
+		WebElement GetChecked= driver.findElement(By.className("radiobutton"));
+		String GetCheckedtxt= GetChecked.getText();
+		Assert.assertTrue(GetCheckedtxt.contentEquals("Radio button is Not checked"));
+		System.out.println(GetCheckedtxt);
+		
+		
+		driver.findElement(By.cssSelector("input[value='Male']")).click();
+		driver.findElement(By.id("buttoncheck")).click();
+		
+		//assertion for Male radio button checked
+
+		WebElement GetChecked1= driver.findElement(By.className("radiobutton"));
+		String GetCheckedtxt1= GetChecked1.getText();
+		Assert.assertTrue(GetCheckedtxt1.contentEquals("Radio button 'Male' is checked"));
+		System.out.println(GetCheckedtxt1);
+		
+		//assertion for Female radio button checked
+		
+		driver.findElement(By.cssSelector("input[value='Female']")).click();
+		driver.findElement(By.id("buttoncheck")).click();
+
+		WebElement GetChecked2= driver.findElement(By.className("radiobutton"));
+		String GetCheckedtxt2= GetChecked2.getText();
+		Assert.assertTrue(GetCheckedtxt2.contentEquals("Radio button 'Female' is checked"));
+		System.out.println(GetCheckedtxt2);
+		
+		// GROUP RADIO BUTTONS DEMO
+		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[1]/label[1]/input")).click();
+		driver.findElement(By.cssSelector("input[value='0 - 5']")).click();
+		driver.findElement(By.cssSelector("button[onclick='getValues();']")).click();
+		//assertion required for checking the value
+		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[1]/label[1]/input")).click();
+		driver.findElement(By.cssSelector("input[value='5 - 15']")).click();
+		driver.findElement(By.cssSelector("button[onclick='getValues();']")).click();
+		//assertion required for checking the value
+		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[1]/label[1]/input")).click();
+		driver.findElement(By.cssSelector("input[value='15 - 50']")).click();
+		driver.findElement(By.cssSelector("button[onclick='getValues();']")).click();		
+		//assertion required for checking the value
+		
+		
+		
+	}
+
+}
