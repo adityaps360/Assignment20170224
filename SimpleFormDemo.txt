@@ -1,0 +1,46 @@
+package startpractising;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+
+public class SimpleFormDemo {
+
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.firefox.marionette","E:\\Drivers for Selenium\\geckodriver-v0.14.0-win64\\geckodriver.exe");
+		
+		// Single Input Field
+		
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.seleniumeasy.com/test/");
+		driver.findElement(By.id("btn_basic_example")).click();
+		driver.findElement(By.xpath("//*[@id='basic']/div/a[1]")).click();
+		driver.findElement(By.id("user-message")).click();
+		driver.findElement(By.id("user-message")).sendKeys("This is a test message ...!!!");
+		driver.findElement(By.cssSelector("button[onclick='showInput();']")).click();
+		
+		// Applying Assertion to test Single Input Field
+		
+		WebElement ShowMsgBtn = driver.findElement(By.cssSelector("span[id='display']"));
+		String ShowMsgtxt= ShowMsgBtn.getText();
+		Assert.assertTrue(ShowMsgtxt.contentEquals("This is a test message ...!!!"));
+        System.out.println(ShowMsgtxt);
+		
+		driver.findElement(By.id("sum1")).click();
+		driver.findElement(By.id("sum1")).sendKeys("5");
+		driver.findElement(By.id("sum2")).click();
+		driver.findElement(By.id("sum2")).sendKeys("10");
+		driver.findElement(By.cssSelector("button[onclick='return total()']")).click();
+		
+		 WebElement GetTotalBtn = driver.findElement(By.cssSelector("span[id='displayvalue']"));
+		 String GetTotaltxt= GetTotalBtn.getText();
+		 Assert.assertTrue(GetTotaltxt.contentEquals("15"));
+		 System.out.println(GetTotaltxt);
+		
+	}
+
+}
