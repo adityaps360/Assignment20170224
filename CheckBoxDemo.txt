@@ -1,0 +1,45 @@
+package startpractising;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class CheckBoxDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+System.setProperty("webdriver.firefox.marionette","E:\\Drivers for Selenium\\geckodriver-v0.14.0-win64\\geckodriver.exe");
+		
+		// Single Checkbox Demo
+		
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.seleniumeasy.com/test/");
+		driver.findElement(By.id("btn_basic_example")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='basic']/div/a[2]")).click();
+		driver.findElement(By.id("isAgeSelected")).click();
+		
+		// assertion to check the presence of text message
+		
+		WebElement Singlecheck = driver.findElement(By.cssSelector("div[id='txtAge']"));
+		String Singlechecktxt= Singlecheck.getText();
+		Assert.assertTrue(Singlechecktxt.contentEquals("Success - Check box is checked"));
+		System.out.println(Singlechecktxt);
+    
+		//	Multiple Checkbox demo
+		
+//		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[1]/label/input")).click();
+//		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[2]/label/input")).click();
+//		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[3]/label/input")).click();
+//		driver.findElement(By.xpath("//*[@id='easycont']/div/div[2]/div[2]/div[2]/div[4]/label/input")).click();
+//		
+		driver.findElement(By.id("check1")).click();
+		WebElement Checkall = driver.findElement(By.cssSelector("input[value='Uncheck All']"));
+		String Checkalltxt= Checkall.getText();
+	//	Assert.assertTrue(Checkalltxt.contentEquals("Uncheck All"));
+		System.out.println(Checkalltxt);
+	}
+
+}
